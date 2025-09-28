@@ -16,28 +16,14 @@ const Header = ({ isSidebar, toggleSidebar, toggleNotifications }: headerProps) 
   const load_app = (applink: string) => {
     nav(applink)
   }
-
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => {
-      const currentScrollY = window.scrollY;
-      currentScrollY > 200 ? setIsVisible(true) : setIsVisible(false);
-    };
-
-    window.addEventListener("scroll", toggleVisibility, { passive: true });
-
-    toggleVisibility();
-    return () => {
-      window.removeEventListener("scroll", toggleVisibility);
-    };
-  }, []);
+ 
+  useEffect(() => { }, []);
 
 
   return (
-    <div className={`${true ? 'block' : 'hidden'} bg-black/60  text-white p-4 w-full flex justify-between items-center shadow-2xl rounded-b-2xl transition-opacity duration-100`}>
+    <div className={`${true ? 'block' : 'hidden'} border-4 border-gray-400 bg-[#cecdcd] shadow-xl  px-4 py-2 w-full flex justify-between items-center shadow-2xl rounded-b-2xl transition-opacity duration-100`}>
       <div className={`flex justify-center items-center`} onClick={() => { load_app('/stepwise/') }}>
-        <p className='text-5xl font-bold text-amber-600 text-stroke-gray'> Stepwise</p>
+        <p className='text-5xl m-1 font-bold text-amber-600 text-stroke-gray'> Stepwise</p>
       </div>
 
       <div>
@@ -46,7 +32,7 @@ const Header = ({ isSidebar, toggleSidebar, toggleNotifications }: headerProps) 
         </div>
 
         <div className="sm:flex sm:flex-row">
-          <button className='m-1 p-2 text-2xl hover:bg-indigo-900' onClick={() => { toggleSidebar() }}>
+          <button className='m-1 p-2 text-2xl hover:bg-amber-600 rounded-xl' onClick={() => { toggleSidebar() }}>
             {isSidebar ? <FontAwesomeIcon icon={faClose} /> : <FontAwesomeIcon icon={faBars} />}
           </button>
         </div>

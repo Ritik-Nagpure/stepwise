@@ -11,7 +11,6 @@ import TermsOfUse from '../Pages/TermsOfUse'
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { useState } from "react";
-import Notifications from "../Utils/Notifications/Notificartions"
 
 function Layout() {
   const [isDark, setIsDark] = useState(true);
@@ -35,16 +34,18 @@ function Layout() {
   const mainDisplayLayout = () => {
     return (
       // Main div with device height and width containing App and Side bar
-      <div className="flex flex-row w-screen h-screen">
+      <div className="flex flex-col w-full h-screen justify-start ">
+        <BrowserRouter>
 
-        <div className={"flex flex-col justify-between w-full object-contain bg-red-600 " + (isDark ? "dark-mode" : "light-mode")}>
-          <BrowserRouter>
-            <div className="top-0 z-50 shadow object-contain">
-              <Header isSidebar={expandSidebar} toggleSidebar={toggleSidebar} toggleNotifications={toggleShowNotification} />
-            </div>
+          <div className="fixed top-0 left-0 w-full z-50">
+            <Header isSidebar={expandSidebar} toggleSidebar={toggleSidebar} toggleNotifications={toggleShowNotification} />
+          </div>
 
-            <div className="flex flex-roww-full">
-              <div className="flex flex-col justify-between object-contain h-full w-full z-0" >
+          <div className="flex flex-1 flex-row w-full overflow-visible ">
+
+            <div className={`flex flex-col flex-grow overflow-y-auto mx-2 w-full mt-24 mb-10 rounded-lg h-[calc(100vh-4rem)] ${isDark ? "dark-mode" : "light-mode"} ${expandSidebar ? 'mr-60' : 'mr-20'}`}>
+              
+              <div className="rounded-lg" >  
                 <Routes>
                   <Route path="/stepwise/" element={<Display />}></Route>
                   <Route path="/stepwise/about" element={<About />}></Route>
@@ -55,22 +56,18 @@ function Layout() {
                   <Route path="/stepwise/*" element={<NotFound />}></Route>
                 </Routes>
               </div>
+
+              <div className="mb-12 py-1 ">
+                <Footer />
+              </div>
+            </div>
+            
+            <div className={`fixed top-20 right-2 h-[calc(100vh-4rem)] ${expandSidebar ? 'w-56' : 'w-16'} z-50`}>
+              <Sidebar isDark={isDark} toggleMode={toggleDisplayMode} expandSidebar={expandSidebar} />
             </div>
 
-            <div className="">
-              <Footer />
-            </div>
-          </BrowserRouter>
-        </div>
-
-        <div className="flex flex-col ">
-          <div className="right-0" >
-            {showNotification ? <Notifications /> : ''}
           </div>
-          <div className="right-0 fixed">
-            {expandSidebar ? <Sidebar isDark={isDark} toggleMode={toggleDisplayMode} /> : ''}
-          </div>
-        </div>
+        </BrowserRouter>
       </div>
     )
   }
