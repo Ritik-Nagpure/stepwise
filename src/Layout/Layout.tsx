@@ -1,16 +1,20 @@
-import Header from "./Header"
-import Footer from "./Footer"
-import Display from "./Display"
-import Sidebar from "./Sidebar"
+import Header from "./Header";
+import Footer from "./Footer";
+import Display from "./Display";
+import Sidebar from "./Sidebar";
 
-import About from "../Pages/About";
+import HomePage from '../Pages/Home'
 import NotFound from "../Pages/NotFound";
+import About from "../Pages/About";
+import PrivacyPolicy from '../Pages/PrivacyPolicy';
+import TermsOfUse from '../Pages/TermsOfUse';
 
-import PrivacyPolicy from '../Pages/PrivacyPolicy'
-import TermsOfUse from '../Pages/TermsOfUse'
+import Login from '../User/Authenticate';
+import UserPage from "../User/User";
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { useState } from "react";
+
 
 function Layout() {
   const [isDark, setIsDark] = useState(true);
@@ -44,15 +48,20 @@ function Layout() {
           <div className="flex flex-1 flex-row w-full overflow-visible ">
 
             <div className={`flex flex-col flex-grow overflow-y-auto mx-2 w-full mt-24 mb-10 rounded-lg h-[calc(100vh-4rem)] ${isDark ? "dark-mode" : "light-mode"} ${expandSidebar ? 'mr-60' : 'mr-20'}`}>
-              
-              <div className="rounded-lg" >  
-                <Routes>
-                  <Route path="/stepwise/" element={<Display />}></Route>
-                  <Route path="/stepwise/about" element={<About />}></Route>
 
+              <div className="rounded-lg" >
+                <Routes>
+                  <Route path="/stepwise/" element={<HomePage />}></Route>
+
+                  <Route path="/stepwise/about" element={<About />}></Route>
                   <Route path="/stepwise/privacy-policy" element={<PrivacyPolicy />}></Route>
                   <Route path="/stepwise/terms-of-use" element={<TermsOfUse />}></Route>
 
+                  <Route path="/stepwise/Home" element={<HomePage />}></Route>
+                  <Route path="/stepwise/Login" element={<Login />}></Route>
+                  <Route path="/stepwise/Profile" element={<UserPage />}></Route>
+
+                  <Route path='/stepwise/Dashboard' element={<Display />}></Route>
                   <Route path="/stepwise/*" element={<NotFound />}></Route>
                 </Routes>
               </div>
@@ -61,7 +70,7 @@ function Layout() {
                 <Footer />
               </div>
             </div>
-            
+
             <div className={`fixed top-20 right-2 h-[calc(100vh-4rem)] ${expandSidebar ? 'w-56' : 'w-16'} z-50`}>
               <Sidebar isDark={isDark} toggleMode={toggleDisplayMode} expandSidebar={expandSidebar} />
             </div>

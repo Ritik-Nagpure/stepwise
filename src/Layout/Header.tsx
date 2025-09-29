@@ -1,9 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faShoppingCart, faBars, faClose } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faClose } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useState } from 'react';
-
 
 type headerProps = {
   isSidebar: Boolean;
@@ -11,17 +9,17 @@ type headerProps = {
   toggleNotifications: () => void;
 }
 
-const Header = ({ isSidebar, toggleSidebar, toggleNotifications }: headerProps) => {
+const Header = ({ isSidebar, toggleSidebar }: headerProps) => {
   const nav = useNavigate()
   const load_app = (applink: string) => {
     nav(applink)
   }
- 
+
   useEffect(() => { }, []);
 
 
   return (
-    <div className={`${true ? 'block' : 'hidden'} border-4 border-gray-400 bg-[#cecdcd] shadow-xl  px-4 py-2 w-full flex justify-between items-center shadow-2xl rounded-b-2xl transition-opacity duration-100`}>
+    <div className={`${true ? 'block' : 'hidden'} border-4 border-gray-400 bg-[#cecdcd] px-4 py-2 w-full flex justify-between items-center shadow-2xl rounded-b-2xl transition-opacity duration-100`}>
       <div className={`flex justify-center items-center`} onClick={() => { load_app('/stepwise/') }}>
         <p className='text-5xl m-1 font-bold text-amber-600 text-stroke-gray'> Stepwise</p>
       </div>
